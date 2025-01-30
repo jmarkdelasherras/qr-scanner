@@ -16,7 +16,7 @@
 
   <div id="error-message">Please allow camera access when it popup or enable it in your browser settings.</div>
 
-  <button id="external-browser-button" style="display: none;">Use Chrome or External Browser</button>
+  <button id="external-browser-button" style="display: none;">Use Chrome or External Browser</button
 
   <script src="./assets/js/jsqr.js"></script>
   <script>
@@ -35,17 +35,16 @@
         qrResult.textContent = "Error accessing camera: " + err;
         externalBrowserButton.style.display = 'block';
         externalBrowserButton.onclick = function () {
-          var url = window.location.href;
-          
-          // Check if running on iOS
-          var isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
-      
-          if (isIOS) {
-              // Open in Safari on iOS
-              window.location.href = url;
+          let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+          if (/android/i.test(userAgent)) {
+            // Android-specific code
+            window.location.href = `intent://${window.location.host}${window.location.pathname}#Intent;scheme=http;package=com.android.chrome;end`;
+          } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            // iOS-specific code
+            window.location.href = `http://${window.location.host}${window.location.pathname}`;
           } else {
-              // Open in external browser on Android
-              window.open(url, '_blank');
+            // Fallback for other platforms
+            window.open(window.location.href, '_blank');
           }
         };      
       });
