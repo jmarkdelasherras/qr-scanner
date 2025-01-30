@@ -36,15 +36,16 @@
         externalBrowserButton.style.display = 'block';
         externalBrowserButton.onclick = function() {
           let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+          let currentUrl = window.location.href;
           if (/android/i.test(userAgent)) {
             // Android-specific code
-            window.location.href = `intent://${window.location.host}${window.location.pathname}#Intent;scheme=http;package=com.android.chrome;end`;
+            window.location.href = `intent://${currentUrl.replace(/^https?:\/\//, '')}#Intent;scheme=${currentUrl.split(':')[0]};package=com.android.chrome;end`;
           } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
             // iOS-specific code
-            window.location.href = `http://${window.location.host}${window.location.pathname}`;
+            window.location.href = currentUrl;
           } else {
             // Fallback for other platforms
-            window.open(window.location.href, '_blank');
+            window.open(currentUrl, '_blank');
           }
         };
       });
