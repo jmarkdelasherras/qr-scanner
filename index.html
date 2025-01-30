@@ -4,71 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QR Code Scanner</title>
-  <style>
-    #scanner-container {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      box-sizing: border-box;
-    }
-    video {
-      width: 100%;
-      max-width: 100%;
-      border: 3px solid #0f9;
-      box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-      transition: box-shadow 0.3s;
-      box-sizing: border-box;
-    }
-    video.scanning {
-      box-shadow: 0 0 20px rgba(0, 255, 0, 1);
-    }
-    #scanner-line {
-      position: absolute;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, rgba(0, 255, 0, 0) 0%, rgba(0, 255, 0, 0.8) 50%, rgba(0, 255, 0, 0) 100%);
-      animation: scan 2s linear infinite;
-      box-sizing: border-box;
-    }
-    @keyframes scan {
-      0% { top: 0%; }
-      100% { top: 100%; }
-    }
-    #qr-result {
-      margin-top: 20px;
-      font-size: 18px;
-      color: green;
-      text-align: center;
-    }
-    #instructions {
-      font-size: 14px;
-      text-align: center;
-      margin-top: 10px;
-      color: #555;
-    }
-    @media (max-width: 600px) {
-      #scanner-container {
-        padding: 5px;
-      }
-      video {
-        border-width: 2px;
-      }
-      #scanner-line {
-        height: 2px;
-      }
-      #qr-result {
-        font-size: 16px;
-      }
-      #instructions {
-        font-size: 12px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <div id="scanner-container">
@@ -78,7 +14,7 @@
   <div id="qr-result"></div>
   <div id="instructions">Align the QR code within the frame to scan.</div>
 
-  <script src="./utils/jsqr.js"></script>
+  <script src="./assets/js/jsqr.js"></script>
   <script>
     let video = document.getElementById('video');
     let qrResult = document.getElementById('qr-result');
