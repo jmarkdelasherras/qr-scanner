@@ -14,10 +14,15 @@
   <div id="qr-result"></div>
   <div id="instructions">Align the QR code within the frame to scan.</div>
 
+  <div id="error-message">Please allow camera access when it popup or enable it in your browser settings.</div>
+
+  <button id="external-browser-button" style="display: none;">Use Chrome or External Browser</button
+
   <script src="./assets/js/jsqr.js"></script>
   <script>
     let video = document.getElementById('video');
     let qrResult = document.getElementById('qr-result');
+    let externalBrowserButton = document.getElementById('external-browser-button');
     
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
       .then(function(stream) {
@@ -28,6 +33,10 @@
       })
       .catch(function(err) {
         qrResult.textContent = "Error accessing camera: " + err;
+        externalBrowserButton.style.display = 'block';
+        externalBrowserButton.onclick = function() {
+          window.open(window.location.href, '_blank');
+        };
       });
 
     function scanQRCode() {

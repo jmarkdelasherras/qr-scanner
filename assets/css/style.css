@@ -68,3 +68,20 @@ video.scanning {
         font-size: 12px;
     }
 }
+
+#external-browser-button {
+    display: none;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0f9;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+}
+#error-message {
+    text-align: center;
+    color: red;
+    margin-top: 10px;
+}
