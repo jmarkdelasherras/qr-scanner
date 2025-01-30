@@ -34,20 +34,20 @@
       .catch(function(err) {
         qrResult.textContent = "Error accessing camera: " + err;
         externalBrowserButton.style.display = 'block';
-        externalBrowserButton.onclick = function() {
-          let userAgent = navigator.userAgent || navigator.vendor || window.opera;
-          let currentUrl = window.location.href;
-          if (/android/i.test(userAgent)) {
-            // Android-specific code
-            window.location.href = `intent://${currentUrl.replace(/^https?:\/\//, '')}#Intent;scheme=${currentUrl.split(':')[0]};package=com.android.chrome;end`;
-          } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            // iOS-specific code
-            window.location.href = currentUrl;
+        externalBrowserButton.onclick = function () {
+          var url = window.location.href;
+          
+          // Check if running on iOS
+          var isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+      
+          if (isIOS) {
+              // Open in Safari on iOS
+              window.location.href = url;
           } else {
-            // Fallback for other platforms
-            window.open(currentUrl, '_blank');
+              // Open in external browser on Android
+              window.open(url, '_blank');
           }
-        };
+        };      
       });
 
     function scanQRCode() {
